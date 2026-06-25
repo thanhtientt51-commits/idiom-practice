@@ -49,6 +49,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 .dhead h2{font-size:2em;font-weight:800;letter-spacing:-1px}
 .dhead .fstar{font-size:1.3em;cursor:pointer;transition:.15s;flex-shrink:0;margin-top:6px}
 .dhead .fstar:hover{transform:scale(1.2)}
+.dhead .backlink{font-size:.72em;color:var(--sub);cursor:pointer;margin-top:8px;flex-shrink:0;display:none;padding:4px 10px;border-radius:8px;border:1px solid var(--border);transition:.15s}
+.dhead .backlink:hover{color:var(--accent);border-color:var(--accent)}
 .dtags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .dtag{padding:4px 12px;border-radius:8px;font-size:.72em;background:#f3f4f6;color:var(--sub);font-weight:500}
 .dsec{margin-bottom:18px}
@@ -66,11 +68,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
 .mem-btn.ndark{background:var(--accent);color:#fff}
 .mem-btn.ndark:hover{background:var(--accent2)}
 /* Pagination */
-.bottom-nav{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:12px}
-.bottom-nav button{padding:8px 20px;border-radius:10px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:.8em;font-weight:600;transition:.15s}
-.bottom-nav button:hover{border-color:var(--accent);color:var(--accent)}
-.bottom-nav button:disabled{opacity:.3;cursor:not-allowed}
-.bottom-nav span{font-size:.78em;color:var(--sub)}
+.bottom-nav{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:16px}
+.bottom-nav button{padding:10px 28px;border-radius:12px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:.85em;font-weight:700;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.bottom-nav button:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 4px 12px rgba(88,101,242,.1);transform:translateY(-1px)}
+.bottom-nav button:disabled{opacity:.25;cursor:not-allowed;transform:none;box-shadow:none}
+.bottom-nav span{font-size:.85em;font-weight:700;color:var(--text)}
 /* Drawer */
 .do{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.12);z-index:250;display:none}
 .dp{position:fixed;left:-200px;top:0;bottom:0;width:180px;z-index:260;background:var(--bg);border-right:1px solid var(--border);padding:80px 16px 20px;display:flex;flex-direction:column;gap:10px;transition:left .3s ease;box-shadow:4px 0 24px rgba(0,0,0,.06)}
@@ -107,7 +109,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei
     <span id="posInfo">1 / 1</span>
     <button onclick="nextItem()" id="btnNext">下一个 &gt;</button>
   </div>
-</div>
+  </div>
 
 <footer class="footer">高频成语学习工具 · 仅供练习参考</footer>
 
@@ -200,7 +202,7 @@ function updateStats(){
 function renderDetail(){
   var item=curPool[curIdx];if(!item){document.getElementById('detailCard').innerHTML='<div style="text-align:center;padding:60px;color:var(--sub)">无匹配结果</div>';return}
   var mastered=isMastered(item.w);
-  var fav=isFav(item.w);var html='<div class="dhead"><h2>'+item.w+'</h2><span class="fstar" onclick="toggleFav(\''+item.w+'\')" title="收藏">'+(fav?'⭐':'☆')+'</span></div>';
+  var fav=isFav(item.w);var backHtml=viewMode!=='all'?'<span class="backlink" onclick="backToAll()" style="display:inline-block">← 返回</span>':'';var html='<div class="dhead"><h2>'+item.w+'</h2><div style="display:flex;align-items:center;gap:10px">'+backHtml+'<span class="fstar" onclick="toggleFav(\''+item.w+'\')" title="收藏">'+(fav?'⭐':'☆')+'</span></div></div>';
   html+='<div class="dtags"><span class="dtag">'+item.p+'</span><span class="dtag">'+item.f+'次</span></div>';
   html+='<div class="dsec"><h3>释义</h3><p>'+item.d+'</p></div>';
   html+='<div class="dsec"><h3>常考用法</h3><p>'+item.u+'</p></div>';
@@ -241,6 +243,7 @@ function showFavorites(){
   curPool=(curType==='idiom'?idioms:words).filter(function(x){return data.favorites.indexOf(x.w)!==-1});
   curIdx=0;viewMode='fav';renderDetail();
 }
+function backToAll(){curPool=curType==='idiom'?idioms:words;curIdx=0;viewMode='all';renderDetail()}
 function prevItem(){if(curIdx>0){curIdx--;renderDetail()}}
 function nextItem(){if(curIdx<curPool.length-1){curIdx++;renderDetail()}}
 
