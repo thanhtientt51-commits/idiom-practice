@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>高频成语 · 行测备考</title>
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--text:#1d1d1f;--sub:#86868b;--accent:#5865f2;--accent2:#8b5cf6;--border:rgba(0,0,0,.06);--radius:16px;--green:#16a34a;--blue:#3b82f6;--warn:#f59e0b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5}
+.nav{position:sticky;top:0;z-index:100;background:rgba(245,245,247,.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 24px}
+.nav-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:50px}
+.nav-badge{font-size:.68em;padding:5px 12px;border-radius:20px;background:#fff;border:1px solid var(--border);color:var(--sub)}
+.main{max-width:1300px;margin:0 auto;padding:24px 28px 32px}
+/* Top bar */
+.top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:16px}
+.type-tabs{display:flex;gap:4px;background:#f0f0f3;border-radius:12px;padding:3px}
+.type-tab{padding:8px 22px;border-radius:10px;font-size:.82em;font-weight:700;cursor:pointer;transition:.2s;border:0;color:var(--sub)}
+.type-tab.active{background:var(--accent);color:#fff}
+.search-wrap{position:relative}
+.search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--sub)}
+.search-wrap input{width:280px;padding:10px 16px 10px 40px;border:2px solid var(--border);border-radius:12px;font-size:.8em;outline:none;background:var(--card);transition:.2s}
+.search-wrap input:focus{border-color:var(--accent)}
+/* Stat cards */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin-bottom:20px}
+@media(max-width:900px){.stat-grid{grid-template-columns:1fr 1fr}}
+.scard{background:var(--card);border-radius:18px;border:1px solid var(--border);padding:20px 22px;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:.2s;position:relative;overflow:hidden}
+.scard:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.scard h4{font-size:.72em;font-weight:700;color:var(--sub);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;text-transform:uppercase;letter-spacing:.5px}
+.scard h4 .sic{font-size:1em;cursor:pointer;transition:.15s}
+.scard h4 .sic:hover{transform:rotate(90deg)}
+.circle-wrap{display:flex;flex-direction:column;align-items:center;margin:4px 0 2px}
+.circle{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6em;font-weight:800;position:relative;background:conic-gradient(var(--accent) 0%,#e0e7ff 0%);margin-bottom:10px}
+.circle::before{content:'';position:absolute;inset:6px;background:#fff;border-radius:50%}
+.circle span{position:relative;z-index:1;color:var(--accent)}
+.circle-sub{font-size:.68em;color:var(--sub);font-weight:500}
+.scard .sm{font-size:.66em;color:var(--sub);margin-top:6px;text-align:center}
+.prog-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:.8em;font-weight:600}
+.prog-row span:first-child{color:var(--sub)}
+.prog-bar{height:8px;background:#f0f0f3;border-radius:5px;margin-bottom:18px;overflow:hidden}
+.prog-bar .fill{height:100%;border-radius:4px;transition:width .4s ease}
+.prog-bar .fill.nfill{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.prog-bar .fill.rfill{background:linear-gradient(90deg,#16a34a,#22c55e)}
+.sbtn{display:block;width:100%;padding:11px;border-radius:12px;font-size:.76em;font-weight:700;cursor:pointer;border:0;text-align:center;margin-top:10px;transition:.15s;letter-spacing:.2px}
+.sbtn.green{background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.2)}
+.sbtn.green:hover{box-shadow:0 4px 14px rgba(22,163,74,.3);transform:translateY(-1px)}
+.sbtn.yellow{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;box-shadow:0 2px 8px rgba(245,158,11,.15)}
+.sbtn.yellow:hover{box-shadow:0 4px 14px rgba(245,158,11,.25);transform:translateY(-1px)}
+.scard .val{font-size:2em;font-weight:800;margin-bottom:2px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.scard .vlabel{font-size:.72em;color:var(--sub);font-weight:500}
+/* Detail card */
+.detail-card{background:var(--card);border-radius:var(--radius);border:1px solid var(--border);padding:28px 32px;box-shadow:0 1px 3px rgba(0,0,0,.04);margin-bottom:20px;position:relative;overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none}.detail-card::-webkit-scrollbar{display:none}
+.dhead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.dhead h2{font-size:2em;font-weight:800;letter-spacing:-1px}
+.dhead .fstar{font-size:1.3em;cursor:pointer;transition:.15s;flex-shrink:0;margin-top:6px}
+.dhead .fstar:hover{transform:scale(1.2)}
+.dtags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.dtag{padding:4px 12px;border-radius:8px;font-size:.72em;background:#f3f4f6;color:var(--sub);font-weight:500}
+.dsec{margin-bottom:18px}
+.dsec h3{font-size:.82em;font-weight:700;color:var(--accent);margin-bottom:8px}
+.dsec p{font-size:.88em;line-height:1.9;color:#444}
+.dsec.warn{background:linear-gradient(135deg,#fffbeb,#fef3c7);padding:14px 18px;border-radius:12px;margin-top:4px}
+.dsec.warn h3{color:#d97706}
+/* Memory buttons */
+.mem-row{display:flex;gap:10px;margin-top:20px}
+.mem-btn{flex:1;padding:12px;border-radius:12px;font-size:.82em;font-weight:700;cursor:pointer;border:0;transition:.15s;text-align:center}
+.mem-btn.ngray{background:#f3f4f6;color:#9ca3af}
+.mem-btn.ngray:hover{background:#e5e7eb}
+.mem-btn.nblue{background:#eff6ff;color:var(--accent)}
+.mem-btn.nblue:hover{background:#dbeafe}
+.mem-btn.ndark{background:var(--accent);color:#fff}
+.mem-btn.ndark:hover{background:var(--accent2)}
+/* Pagination */
+.bottom-nav{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:12px}
+.bottom-nav button{padding:8px 20px;border-radius:10px;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:.8em;font-weight:600;transition:.15s}
+.bottom-nav button:hover{border-color:var(--accent);color:var(--accent)}
+.bottom-nav button:disabled{opacity:.3;cursor:not-allowed}
+.bottom-nav span{font-size:.78em;color:var(--sub)}
+/* Drawer */
+.do{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.12);z-index:250;display:none}
+.dp{position:fixed;left:-200px;top:0;bottom:0;width:180px;z-index:260;background:var(--bg);border-right:1px solid var(--border);padding:80px 16px 20px;display:flex;flex-direction:column;gap:10px;transition:left .3s ease;box-shadow:4px 0 24px rgba(0,0,0,.06)}
+.dt{position:absolute;right:-44px;top:50%;transform:translateY(-50%);background:var(--card);border-radius:0 12px 12px 0;padding:13px 8px;cursor:pointer;box-shadow:2px 0 16px rgba(0,0,0,.08);border:1px solid var(--border);border-left:0;display:flex;flex-direction:column;gap:4px;z-index:261}
+.dbtn{padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:.78em;font-weight:700;text-align:center;text-decoration:none;display:block;transition:.15s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.dbtn:hover{transform:translateY(-1px);border-color:var(--accent);box-shadow:0 4px 12px rgba(88,101,242,.1)}
+.footer{text-align:center;padding:20px;color:#b0b0b8;font-size:.65em;border-top:1px solid var(--border)}
+</style></head><body>
+
+<nav class="nav"><div class="nav-inner"><div style="font-size:.88em;font-weight:700;display:flex;align-items:center;gap:6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>高频成语</div><div class="nav-badge">行测言语理解 · 提分利器</div></div></nav>
+
+<div class="main">
+  <!-- Top Row -->
+  <div class="top-row">
+    <div class="type-tabs" id="typeTabs">
+      <div class="type-tab active" onclick="switchType('idiom',this)">成语</div>
+      <div class="type-tab" onclick="switchType('word',this)">实词</div>
+    </div>
+    <div class="search-wrap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="searchInput" placeholder="搜索成语/实词..." oninput="doSearch()"></div>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="stat-grid">
+    <div class="scard"><h4>学习进度</h4><div class="circle-wrap"><div class="circle" id="progCircle"><span id="progPct">0%</span></div><div class="circle-sub">已掌握</div></div></div>
+    <div class="scard"><h4>今日任务<span class="sic" onclick="resetToday()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></span></h4><div class="prog-row"><span>新学</span><span id="newCount">0 / 10</span></div><div class="prog-bar"><div class="fill nfill" id="newFill" style="width:0%"></div></div><div class="prog-row"><span>复习</span><span id="revCount">0 / 0</span></div><div class="prog-bar"><div class="fill rfill" id="revFill" style="width:0%"></div></div></div>
+    <div class="scard"><h4>复习旧卡<span class="sic" onclick="resetReview()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg></span></h4><div class="val" id="toReview">0</div><div class="vlabel">待复习</div><button class="sbtn green" onclick="startReview()">开始复习</button></div>
+    <div class="scard"><h4>收藏夹</h4><div class="val" id="favCount">0</div><div class="vlabel">已收藏</div><button class="sbtn yellow" onclick="showFavorites()">查看收藏</button></div>
+  </div>
+
+  <!-- Detail Card -->
+  <div class="detail-card" id="detailCard"></div>
+  <div class="bottom-nav">
+    <button onclick="prevItem()" id="btnPrev">&lt; 上一个</button>
+    <span id="posInfo">1 / 1</span>
+    <button onclick="nextItem()" id="btnNext">下一个 &gt;</button>
+  </div>
+</div>
+
+<footer class="footer">高频成语学习工具 · 仅供练习参考</footer>
+
+<div class="do" id="drawerOverlay" onclick="toggleDrawer()"></div>
+<div class="dp" id="drawerPanel"><div class="dt" onclick="toggleDrawer()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></div><a href="https://thanhtientt51-commits.github.io/jiangsu-jobs-2026/?id="+encodeURIComponent((new URLSearchParams(location.search)).get("id")||"")+"" class="dbtn">筛岗</a><a href="https://thanhtientt51-commits.github.io/mock-interview/?id="+encodeURIComponent((new URLSearchParams(location.search)).get("id")||"")+"" class="dbtn">面试</a><a href="https://thanhtientt51-commits.github.io/xct/?id="+encodeURIComponent((new URLSearchParams(location.search)).get("id")||"")+"" class="dbtn">行测</a><a href="https://thanhtientt51-commits.github.io/sl-practice/?id="+encodeURIComponent((new URLSearchParams(location.search)).get("id")||"")+"" class="dbtn">申论</a><a href="https://thanhtientt51-commits.github.io/shenlunguifanciyu/?id="+encodeURIComponent((new URLSearchParams(location.search)).get("id")||"")+"" class="dbtn">规范词</a></div>
+
+<script>
+var drawerOpen=false;function toggleDrawer(){drawerOpen=!drawerOpen;document.getElementById('drawerPanel').style.left=drawerOpen?'0':'-200px';document.getElementById('drawerOverlay').style.display=drawerOpen?'block':'none'}
+
+// ====== DATA ======
+var idioms=[
+  {w:"一脉相承",p:"中性词",f:51,d:"指某种思想、行为或学说之间有着继承关系，像血脉一样连贯不断。强调时间上的延续性和内在的传承关系。",u:"常用于形容文化、传统、理念、制度等前后相继、有渊源关系。常与'与……一脉相承'搭配，考查前后逻辑是否体现继承性。",t:"易与'一脉相通'混淆，后者强调相通之处，不强调继承；易与'不谋而合'混淆，后者强调不约而同，无继承关系。"},
+  {w:"不谋而合",p:"中性词",f:43,d:"指事先没有商量过，意见或行动却完全一致。强调巧合性的一致，非有意协调的结果。",u:"常用于逻辑填空或片段阅读中考查因果关系，区分'不约而同'与'不谋而合'的细微差异。",t:"易与'不约而同'混淆，后者侧重行动上的一致；易与'异口同声'混淆，后者强调说同样的话。"},
+  {w:"相得益彰",p:"褒义词",f:38,d:"指两个人或两件事物互相配合，双方的能力和作用更能显示出来。强调互利共赢、互相促进的关系。",u:"常用于形容合作、配合、互补关系。考题常与'相辅相成'对比，后者强调互相辅助、缺一不可。",t:"易与'相辅相成'混淆，后者侧重互相辅助完成；易与'相映成趣'混淆，后者侧重景色互相衬托。"},
+  {w:"相辅相成",p:"褒义词",f:35,d:"指两件事物互相配合、互相辅助，缺一不可。强调互相依赖、互为条件的关系。",u:"常与'相得益彰'对比考查。'相辅相成'侧重互相辅助缺一不可，'相得益彰'侧重互相配合效果更好。",t:"易与'相得益彰'混淆；易与'珠联璧合'混淆，后者侧重完美搭配。"},
+  {w:"日新月异",p:"褒义词",f:33,d:"每天都在更新，每月都有变化。指发展或进步迅速，不断出现新事物、新气象。强调变化速度快、变化幅度大。",u:"常用于形容科技发展、城市建设、时代变化等。常与'突飞猛进''翻天覆地'等并列出现。",t:"易与'翻天覆地'混淆，后者强调变化巨大、彻底；易与'瞬息万变'混淆，后者强调变化极快。"},
+  {w:"不可或缺",p:"中性词",f:31,d:"不可以缺少，形容非常重要。强调必要性，缺少了就无法正常运转或达到目的。",u:"常用于逻辑填空，考查对事物重要性的判断。需注意与'必不可少'的替换使用。",t:"与'必不可少'基本同义可互换；与'举足轻重'有区别，后者强调地位重要、影响力大。"},
+  {w:"推波助澜",p:"贬义词",f:28,d:"比喻从旁鼓动、助长事物的声势和发展，扩大影响。多指助长坏的事物发展。",u:"常用于感情色彩判断题，因含贬义需注意语境。题干如描述消极现象时可选。",t:"易与'火上浇油'混淆，后者更强调使事态恶化；易与'推陈出新'混淆，两者意思完全相反。"},
+  {w:"司空见惯",p:"中性词",f:27,d:"指某事常见，不足为奇。来源于唐代诗人刘禹锡的诗句。强调事物因常见而被忽视。",u:"常用于逻辑填空，表达'常见到不觉得奇怪'的意思。注意与'屡见不鲜'的区别。",t:"与'屡见不鲜'基本同义可互换；与'习以为常'有区别，后者强调已养成习惯。"},
+  {w:"举足轻重",p:"褒义词",f:26,d:"只要脚移动一下，就会影响两边的轻重。指处于重要地位，一举一动都足以影响全局。",u:"常用于强调某人、某组织或某因素的重要性。考题常考查与'不可或缺'的区别。",t:"易与'不可或缺'混淆，后者强调必要性而非影响力；易与'一言九鼎'混淆，后者专指说话有分量。"},
+  {w:"无与伦比",p:"褒义词",f:25,d:"指事物非常完美，没有能跟它相比的。形容极为出众、独一无二。",u:"常用于逻辑填空表达最高级比较。注意与'无可比拟'的区别使用。",t:"与'无可比拟'基本同义；与'独一无二'有区别，后者强调唯一性而非优秀程度。"},
+  {w:"津津乐道",p:"中性词",f:24,d:"形容对某事物很有兴趣地说个不停。强调人们对话题的兴趣和谈论热情。",u:"常用于片段阅读或逻辑填空，描绘人们对某话题的态度。",t:"易与'滔滔不绝'混淆，后者仅强调说话连续不断；易与'喋喋不休'混淆，后者含贬义。"},
+  {w:"异曲同工",p:"褒义词",f:23,d:"不同的曲调演得同样好。比喻话的说法不一而用意相同，或一件事情的做法不同而都巧妙地达到目的。",u:"常用于类比推理题，强调方法不同但效果相同。",t:"易与'殊途同归'混淆，后者强调结局相同；易与'不约而同'混淆，后者强调事先未约定而一致。"},
+  {w:"刻不容缓",p:"中性词",f:22,d:"指形势紧迫，一刻也不允许拖延。强调时间上的紧迫性和行动的必要性。",u:"常用于逻辑填空表达紧急程度，与'迫在眉睫''当务之急'等并列考查。",t:"与'迫在眉睫'基本同义；与'当务之急'有区别，后者是名词性短语，侧重当前最重要的事。"},
+  {w:"引人注目",p:"中性词",f:21,d:"形容人或事物很具特色，引起人们的注意。强调吸引注意力的效果。",u:"常用于逻辑填空或阅读理解，表达某事物受到广泛关注。",t:"与'备受关注'基本同义可互换；与'令人瞩目'有区别，后者多用于重大事件。"},
+  {w:"不言而喻",p:"中性词",f:20,d:"不用说话就能明白，形容道理很明显。强调事物的显而易见性，无需多加解释。",u:"常用于逻辑填空和片段阅读，表达结论的显而易见。",t:"与'显而易见'基本同义可互换；与'可想而知'有区别，后者侧重可以想象到。"},
+  {w:"潜移默化",p:"中性词",f:19,d:"指人的思想、性格和习惯等在不知不觉中受到外界影响而逐渐发生变化。强调影响的隐蔽性和长期性。",u:"常用于形容环境、文化、教育等对人的影响。常与'耳濡目染'对比考查。",t:"易与'耳濡目染'混淆，后者侧重通过听和看受到影响；两者常并列使用。"},
+  {w:"层出不穷",p:"中性词",f:18,d:"接连不断地出现，没有穷尽。强调事物出现的频繁性和多样性。",u:"常用于逻辑填空表达新事物或新问题的不断出现。",t:"与'屡见不鲜'有区别，后者强调常见而不奇怪；与'层见叠出'基本同义。"},
+  {w:"毋庸置疑",p:"中性词",f:17,d:"事实明显或理由充足，没有什么可以怀疑的。强调确定性，不容质疑。",u:"常用于片段阅读或逻辑填空，表达论点或事实的确定性。",t:"与'不容置疑'基本同义可互换；与'毫无疑问'同义，但更书面化。"},
+  {w:"博大精深",p:"褒义词",f:16,d:"形容思想和学识广博高深。多用于形容理论、学识、思想等。",u:"常用来形容中华文化、学术体系等。考题中常与'源远流长'并列出现。",t:"与'源远流长'常搭配使用，后者强调历史悠久；两者结合形容文化的久远和深厚。"},
+  {w:"因地制宜",p:"褒义词",f:15,d:"根据各地的具体情况，制定适宜的办法。强调灵活性、针对性和实事求是。",u:"政策类题目高频出现。常与'因时制宜''因人而异'等并列考查。",t:"与'对症下药'有区别，后者侧重针对问题采取措施；与'量体裁衣'有相似之处。"},
+];
+
+var words=[
+  {w:"遏制",p:"中性词",f:28,d:"指阻止、控制某种行为或事态发展。强调用强制手段加以限制，力度较强。",u:"常用于逻辑填空与'遏止'对比考查。'遏制'侧重控制限制，'遏止'侧重完全停止。",t:"易与'遏止'混淆，后者强调完全停止；易与'抑制'混淆，后者侧重自我控制。"},
+  {w:"遏止",p:"中性词",f:25,d:"指用力阻止，使完全停止。强调使事物不再继续发生的彻底性。",u:"常用于与'遏制'对比考查，两词力度不同。'遏止'语义更重。",t:"易与'遏制'混淆；与'制止'同义，但更书面化。"},
+  {w:"积淀",p:"褒义词",f:22,d:"指长期积累沉淀下来。多用于形容文化、经验、智慧等在长时间中形成的积累。",u:"常与'积累''沉淀'对比考查。'积淀'强调时间久、有厚度。",t:"与'积累'有区别，后者不强调时间性；与'沉淀'有相似处，后者更强调筛选后的留存。"},
+  {w:"彰显",p:"褒义词",f:20,d:"指鲜明地显示出来。强调使某种品质、特征或价值突出地表现出来。",u:"常用于政治类、社会类文段。与'体现''展示'等词对比考查。",t:"与'体现'有区别，后者不一定强调鲜明性；与'表露'有区别，后者侧重自然流露。"},
+  {w:"秉承",p:"中性词",f:18,d:"指接受、承接，多用于继承旨意、指示、传统等。有庄重色彩。",u:"常用于正式文书或政论文中。与'继承''沿袭'等词对比考查。",t:"与'继承'同义，但更书面、庄重；与'沿袭'有区别，后者可以用于贬义。"},
+  {w:"契机",p:"褒义词",f:17,d:"指事物转化的关键时机。强调一个转折点或机会的出现。",u:"常用于逻辑填空表示'以……为契机'的固定搭配。多用于政策、发展类文段。",t:"与'机会'有区别，后者更日常；与'转机'基本同义可互换。"},
+  {w:"折射",p:"中性词",f:15,d:"比喻把事物的表象或实质间接反映出来。强调通过某一现象看到背后更深层的问题。",u:"常用于片段阅读的分析类题目。常搭配'折射出……问题''折射出……现象'。",t:"与'反映'有区别，后者更直接；'折射'强调间接性和深刻性。"},
+  {w:"羁绊",p:"中性词",f:13,d:"指缠住了不能脱身，束缚。多用于抽象事物对人的约束和限制。",u:"常用于逻辑填空，与'束缚''桎梏'等词对比考查。'羁绊'书面色彩更浓。",t:"与'束缚'基本同义；与'桎梏'相比，后者程度更重，像镣铐一样。"},
+  {w:"底蕴",p:"褒义词",f:12,d:"指内心蕴藏的才智、见识或事物的内涵、基础。强调内在的深度和厚度。",u:"常与'文化底蕴''历史底蕴'搭配使用。考题中与'内涵''素养'对比出现。",t:"与'内涵'有区别，'底蕴'更强调深厚和积累；'内涵'更侧重本质内容。"},
+  {w:"嬗变",p:"中性词",f:10,d:"指演变、蜕变。多用于描述事物性质、形态的根本性变化。书面色彩很浓。",u:"高频出现在言语理解的片段阅读中。常用于描述社会、文化、制度的深刻变革。",t:"与'演变'基本同义，但更书面、更正式；与'蜕变'有相似处，后者强调质变。"},
+];
+
+// ====== STATE ======
+var curType='idiom',curPool=idioms,curIdx=0,viewMode='all';
+var STORE_KEY='idiom_data';
+var data=JSON.parse(localStorage.getItem(STORE_KEY)||'{"mastered":[],"needReview":[],"favorites":[],"todayNew":0,"todayRev":0,"lastDate":""}');
+var today=new Date().toISOString().slice(0,10);
+if(data.lastDate!==today){data.todayNew=0;data.todayRev=0;data.lastDate=today;saveData()}
+
+function saveData(){localStorage.setItem(STORE_KEY,JSON.stringify(data));updateStats()}
+function isMastered(w){return data.mastered.indexOf(w)!==-1}
+function isFav(w){return data.favorites.indexOf(w)!==-1}
+function toggleFav(w){var idx=data.favorites.indexOf(w);if(idx===-1)data.favorites.push(w);else data.favorites.splice(idx,1);saveData();renderDetail()}
+
+// ====== SWITCH ======
+function switchType(t,el){
+  curType=t;document.querySelectorAll('.type-tab').forEach(function(x){x.classList.remove('active')});el.classList.add('active');
+  curPool=t==='idiom'?idioms:words;curIdx=0;viewMode='all';updateStats();renderDetail();
+  document.getElementById('searchInput').value='';
+}
+function doSearch(){
+  var q=document.getElementById('searchInput').value.trim().toLowerCase();
+  var pool=curType==='idiom'?idioms:words;
+  if(q){curPool=pool.filter(function(x){return x.w.indexOf(q)!==-1||x.d.indexOf(q)!==-1});curIdx=0;viewMode='search'}
+  else{curPool=pool;curIdx=0;viewMode='all'}
+  renderDetail();
+}
+
+// ====== STATS ======
+function updateStats(){
+  var pool=curType==='idiom'?idioms:words;
+  var mastered=data.mastered.filter(function(x){return pool.some(function(y){return y.w===x})});
+  var pct=pool.length>0?Math.round(mastered.length/pool.length*100):0;
+  document.getElementById('progPct').textContent=pct+'%';
+  document.getElementById('progCircle').style.background='conic-gradient(var(--accent) '+pct*3.6+'deg,#e0e7ff 0deg)';
+  document.getElementById('newCount').textContent=data.todayNew+' / 10';
+  document.getElementById('newFill').style.width=Math.min(data.todayNew/10*100,100)+'%';
+  var nr=data.needReview.filter(function(x){return pool.some(function(y){return y.w===x})});
+  document.getElementById('revCount').textContent=data.todayRev+' / '+nr.length;
+  document.getElementById('revFill').style.width=nr.length>0?Math.min(data.todayRev/nr.length*100,100)+'%':'0%';
+  document.getElementById('toReview').textContent=nr.length;
+  document.getElementById('favCount').textContent=data.favorites.filter(function(x){return pool.some(function(y){return y.w===x})}).length;
+}
+
+// ====== DETAIL ======
+function renderDetail(){
+  var item=curPool[curIdx];if(!item){document.getElementById('detailCard').innerHTML='<div style="text-align:center;padding:60px;color:var(--sub)">无匹配结果</div>';return}
+  var mastered=isMastered(item.w);
+  var fav=isFav(item.w);var html='<div class="dhead"><h2>'+item.w+'</h2><span class="fstar" onclick="toggleFav(\''+item.w+'\')" title="收藏">'+(fav?'⭐':'☆')+'</span></div>';
+  html+='<div class="dtags"><span class="dtag">'+item.p+'</span><span class="dtag">'+item.f+'次</span></div>';
+  html+='<div class="dsec"><h3>释义</h3><p>'+item.d+'</p></div>';
+  html+='<div class="dsec"><h3>常考用法</h3><p>'+item.u+'</p></div>';
+  html+='<div class="dsec warn"><h3>易错陷阱</h3><p>'+item.t+'</p></div>';
+  html+='<div class="mem-row">';
+  html+='<button class="mem-btn ngray" onclick="markMem(0)">不认识</button>';
+  html+='<button class="mem-btn nblue" onclick="markMem(1)">模糊</button>';
+  html+='<button class="mem-btn ndark" onclick="markMem(2)">认识</button>';
+  html+='</div>';
+  document.getElementById('detailCard').innerHTML=html;
+  document.getElementById('posInfo').textContent=(curIdx+1)+' / '+curPool.length;
+  document.getElementById('btnPrev').disabled=curIdx===0;
+  document.getElementById('btnNext').disabled=curIdx>=curPool.length-1;
+}
+
+function markMem(level){
+  var item=curPool[curIdx];if(!item)return;
+  var w=item.w;
+  // Remove from all lists first
+  data.mastered=data.mastered.filter(function(x){return x!==w});
+  data.needReview=data.needReview.filter(function(x){return x!==w});
+  if(level===2){data.mastered.push(w);data.todayNew++;data.todayRev++}
+  else if(level===1){data.needReview.push(w);data.todayNew++}
+  else{data.needReview.push(w)}
+  saveData();renderDetail();
+}
+function startReview(){
+  var nr=data.needReview.filter(function(x){return curPool.some(function(y){return y.w===x})});
+  if(!nr.length){alert('暂无待复习词汇');return}
+  curPool=nr.map(function(w){return curType==='idiom'?idioms.find(function(x){return x.w===w}):words.find(function(x){return x.w===w})}).filter(Boolean);
+  curIdx=0;viewMode='review';renderDetail();
+}
+function resetReview(){data.needReview=[];data.todayRev=0;saveData();renderDetail()}
+function resetToday(){data.todayNew=0;data.todayRev=0;saveData();renderDetail()}
+function showFavorites(){
+  var favs=data.favorites.filter(function(x){return curPool.some(function(y){return y.w===x})});
+  if(!favs.length){alert('暂无收藏');return}
+  curPool=(curType==='idiom'?idioms:words).filter(function(x){return data.favorites.indexOf(x.w)!==-1});
+  curIdx=0;viewMode='fav';renderDetail();
+}
+function prevItem(){if(curIdx>0){curIdx--;renderDetail()}}
+function nextItem(){if(curIdx<curPool.length-1){curIdx++;renderDetail()}}
+
+// ====== INIT ======
+updateStats();renderDetail();
+</script></body></html>
